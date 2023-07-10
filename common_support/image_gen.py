@@ -20,6 +20,7 @@ def add_newline_to_table_data(table_data):
 def generate_bill(table_data=None):
     config = Config()
     bill_width = config.get("bill_width") or 400
+    bill_width = float(bill_width)
     height = 600
     dpi = 1200
     qr_size = 200
