@@ -153,6 +153,17 @@ class UI(QWidget, Ui_Form):
         self.PB_plu.clicked.connect(self.search_by_plu)
         self.PB_qty.clicked.connect(lambda: self.weight_input_clicked(self.lineEdit.text()))
 
+    def clear_bill(self):
+        curr_index = self.tabWidget.currentIndex()
+        tablewidget:QTableWidget = None
+        if curr_index == 0:
+            tablewidget = self.tableC1
+        if curr_index == 1:
+            tablewidget = self.tableC2
+        if curr_index == 2:
+            tablewidget = self.tableC3
+
+        tablewidget.clear()
     def print_bill(self):
         self.PB_print.setEnabled(False)
 
@@ -169,7 +180,7 @@ class UI(QWidget, Ui_Form):
             # print_bill(tablewidget)
 
             self.thread = PrintBillThread(tablewidget)
-            self.thread.finished.connect(lambda: self.PB_print.setEnabled(True))  # Enable PB_print after self.thread finishes
+            self.thread.finished.connect(lambda: self.PB_print.setEnabled(True) and self.clear_bill)  # Enable PB_print after self.thread finishes
             self.thread.start()
         except Exception as e:
             print(e)
