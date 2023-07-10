@@ -13,9 +13,7 @@ class UI_product_options(QWidget, Ui_Form):
 
         self.setupUi(self)
         self.label.setText(label)
-
         self.product_name_list = get_product_name_list()
-
         self.add_product_to_current_table=add_product_to_current_table
         products= filter_list(strings=self.product_name_list,search_text=label)
 
@@ -24,6 +22,7 @@ class UI_product_options(QWidget, Ui_Form):
             layout = QVBoxLayout(container)
             btn:QPushButton=QPushButton(self)
             btn.setFixedSize(100,100)
+            container.setFixedSize(100,120)
             btn.product=product
             btn.clicked.connect(self.product_clicked)
             btn.setStyleSheet(f"border-image: url('{self.ai_products_dpath}/{product}.gif');")
