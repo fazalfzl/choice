@@ -267,6 +267,7 @@ class UI(QWidget, Ui_Form):
                 tablewidget = self.tableC3
 
             add_to_bill(product_name, tablewidget, weight_input=self.PB_weight_input.text())
+            tablewidget.scrollToBottom()
         except Exception as e:
             print(e)
 
