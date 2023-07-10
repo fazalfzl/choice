@@ -20,6 +20,9 @@ path_to_dir = os.getcwd()
 os.environ["lazafron_version"] = str(version)
 os.environ["lazafron_pathtodir"] = path_to_dir
 
+
+
+
 def setTable(table: QTableWidget):
     headers = ['ITEM', 'PRICE', 'QTY', 'AMOUNT']
     table.setColumnCount(len(headers))
