@@ -14,6 +14,12 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_3" columnstretch="0,0,0">
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
    <item row="0" column="0">
     <widget class="QWidget" name="widget" native="true">
      <layout class="QGridLayout" name="gridLayout_2" rowstretch="3,0,0">
@@ -139,6 +145,12 @@ height: 50px;
    <item row="0" column="2">
     <widget class="QWidget" name="widget_3" native="true">
      <layout class="QGridLayout" name="gridLayout_6" rowstretch="1,0">
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
       <item row="0" column="0">
        <widget class="QTabWidget" name="tabWidget">
         <property name="styleSheet">
@@ -156,6 +168,12 @@ height: 50px;
           <string>C1</string>
          </attribute>
          <layout class="QGridLayout" name="gridLayout_5">
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
           <item row="0" column="0">
            <widget class="QTableWidget" name="tableC1">
             <property name="styleSheet">
@@ -172,6 +190,12 @@ background-color: rgb(255, 255, 127);
           <string>C2</string>
          </attribute>
          <layout class="QGridLayout" name="gridLayout_7">
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
           <item row="0" column="0">
            <widget class="QTableWidget" name="tableC2"/>
           </item>
@@ -182,6 +206,12 @@ background-color: rgb(255, 255, 127);
           <string>C3</string>
          </attribute>
          <layout class="QGridLayout" name="gridLayout_8">
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
           <item row="0" column="0">
            <widget class="QTableWidget" name="tableC3"/>
           </item>
@@ -237,6 +267,12 @@ background-color: rgb(255, 255, 127);
          <item row="2" column="0">
           <widget class="QWidget" name="widget_5" native="true">
            <layout class="QGridLayout" name="gridLayout_10">
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
             <item row="1" column="0">
              <widget class="QWidget" name="widget_7" native="true">
               <property name="styleSheet">
@@ -392,8 +428,14 @@ color: rgb(0, 85, 0);
             </size>
            </property>
            <layout class="QGridLayout" name="gridLayout_12">
+            <property name="leftMargin">
+             <number>6</number>
+            </property>
             <property name="topMargin">
              <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>6</number>
             </property>
             <property name="bottomMargin">
              <number>0</number>
@@ -417,6 +459,18 @@ color: rgb(0, 85, 0);
          <item row="1" column="0">
           <widget class="QWidget" name="widget_9" native="true">
            <layout class="QGridLayout" name="gridLayout_15">
+            <property name="leftMargin">
+             <number>6</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>6</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
             <item row="0" column="2">
              <widget class="QPushButton" name="PB_empty">
               <property name="text">
