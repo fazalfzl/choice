@@ -168,7 +168,6 @@ class UI(QWidget, Ui_Form):
         setTable(tablewidget)
     def print_bill(self):
         self.PB_print.setEnabled(False)
-
         try:
             curr_index = self.tabWidget.currentIndex()
             tablewidget = None
