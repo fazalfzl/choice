@@ -382,6 +382,10 @@ color: rgb(0, 85, 0);
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(255, 240, 64);
+font: 75 16pt &quot;MS Shell Dlg 2&quot;;</string>
+                 </property>
                  <property name="text">
                   <string>QTY</string>
                  </property>
@@ -395,6 +399,10 @@ color: rgb(0, 85, 0);
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(0, 255, 127);
+font: 75 16pt &quot;MS Shell Dlg 2&quot;;</string>
+                 </property>
                  <property name="text">
                   <string>PLU</string>
                  </property>
@@ -407,6 +415,10 @@ color: rgb(0, 85, 0);
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(255, 170, 255);
+font: 75 16pt &quot;MS Shell Dlg 2&quot;;</string>
                  </property>
                  <property name="text">
                   <string>DELETE ROW</string>
@@ -448,6 +460,10 @@ color: rgb(0, 85, 0);
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(85, 85, 255);
+font: 75 18pt &quot;MS Shell Dlg 2&quot;;</string>
+              </property>
               <property name="text">
                <string>PRINT</string>
               </property>
@@ -473,6 +489,9 @@ color: rgb(0, 85, 0);
             </property>
             <item row="0" column="2">
              <widget class="QPushButton" name="PB_empty">
+              <property name="styleSheet">
+               <string notr="true">font: 75 16pt &quot;MS Shell Dlg 2&quot;;</string>
+              </property>
               <property name="text">
                <string>X</string>
               </property>

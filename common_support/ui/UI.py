@@ -224,6 +224,8 @@ class Ui_Form(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.PB_qty.sizePolicy().hasHeightForWidth())
         self.PB_qty.setSizePolicy(sizePolicy)
+        self.PB_qty.setStyleSheet("background-color: rgb(255, 240, 64);\n"
+"font: 75 16pt \"MS Shell Dlg 2\";")
         self.PB_qty.setObjectName("PB_qty")
         self.gridLayout_13.addWidget(self.PB_qty, 1, 0, 1, 1)
         self.PB_plu = QtWidgets.QPushButton(self.widget_8)
@@ -232,6 +234,8 @@ class Ui_Form(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.PB_plu.sizePolicy().hasHeightForWidth())
         self.PB_plu.setSizePolicy(sizePolicy)
+        self.PB_plu.setStyleSheet("background-color: rgb(0, 255, 127);\n"
+"font: 75 16pt \"MS Shell Dlg 2\";")
         self.PB_plu.setObjectName("PB_plu")
         self.gridLayout_13.addWidget(self.PB_plu, 0, 0, 1, 1)
         self.PB_delete_row = QtWidgets.QPushButton(self.widget_8)
@@ -240,6 +244,8 @@ class Ui_Form(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.PB_delete_row.sizePolicy().hasHeightForWidth())
         self.PB_delete_row.setSizePolicy(sizePolicy)
+        self.PB_delete_row.setStyleSheet("background-color: rgb(255, 170, 255);\n"
+"font: 75 16pt \"MS Shell Dlg 2\";")
         self.PB_delete_row.setObjectName("PB_delete_row")
         self.gridLayout_13.addWidget(self.PB_delete_row, 2, 0, 1, 1)
         self.gridLayout_10.addWidget(self.widget_8, 1, 1, 1, 1)
@@ -256,6 +262,8 @@ class Ui_Form(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.PB_print.sizePolicy().hasHeightForWidth())
         self.PB_print.setSizePolicy(sizePolicy)
+        self.PB_print.setStyleSheet("background-color: rgb(85, 85, 255);\n"
+"font: 75 18pt \"MS Shell Dlg 2\";")
         self.PB_print.setObjectName("PB_print")
         self.gridLayout_12.addWidget(self.PB_print, 0, 0, 1, 1)
         self.gridLayout_9.addWidget(self.widget_6, 3, 0, 1, 1)
@@ -265,6 +273,7 @@ class Ui_Form(object):
         self.gridLayout_15.setContentsMargins(6, 0, 6, 0)
         self.gridLayout_15.setObjectName("gridLayout_15")
         self.PB_empty = QtWidgets.QPushButton(self.widget_9)
+        self.PB_empty.setStyleSheet("font: 75 16pt \"MS Shell Dlg 2\";")
         self.PB_empty.setObjectName("PB_empty")
         self.gridLayout_15.addWidget(self.PB_empty, 0, 2, 1, 1)
         self.lineEdit = QtWidgets.QLineEdit(self.widget_9)
