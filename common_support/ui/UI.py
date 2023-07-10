@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(710, 552)
+        Form.resize(748, 552)
         self.gridLayout_3 = QtWidgets.QGridLayout(Form)
         self.gridLayout_3.setObjectName("gridLayout_3")
         self.widget = QtWidgets.QWidget(Form)
@@ -221,9 +221,7 @@ class Ui_Form(object):
         self.gridLayout_6.setRowStretch(0, 1)
         self.gridLayout_3.addWidget(self.widget_3, 0, 2, 1, 1)
         self.scrollArea = QtWidgets.QScrollArea(Form)
-        self.scrollArea.setStyleSheet("QScrollBar {\n"
-"width: 70px;\n"
-"} ")
+        self.scrollArea.setStyleSheet("")
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.SAWC_products = QtWidgets.QWidget()

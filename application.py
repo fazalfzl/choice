@@ -276,6 +276,9 @@ if __name__ == "__main__":
     main_window = UI()
     main_window.showMaximized()
 
+    stylesheet = """QScrollBar {\nwidth: 70px;\n}"""
+    app.setStyleSheet(stylesheet)
+
     try:
         recognition_thread = RecognitionThread()
         recognition_thread.start()

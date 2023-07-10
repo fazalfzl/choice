@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>710</width>
+    <width>748</width>
     <height>552</height>
    </rect>
   </property>
@@ -339,9 +339,7 @@ background-color: rgb(255, 255, 127);
    <item row="0" column="1">
     <widget class="QScrollArea" name="scrollArea">
      <property name="styleSheet">
-      <string notr="true">QScrollBar {
-width: 70px;
-} </string>
+      <string notr="true"/>
      </property>
      <property name="widgetResizable">
       <bool>true</bool>
