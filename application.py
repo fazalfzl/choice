@@ -249,6 +249,7 @@ class UI(QWidget, Ui_Form):
     def show_setup_labels(self):
         try:
             self.setup_labels_window = UI_setup_labels()
+            self.setup_labels_window.setStyleSheet("""QScrollBar {\nwidth: 70px;\n}""")
             self.setup_labels_window.showMaximized()
         except Exception as e:
             print(e)
@@ -274,10 +275,9 @@ class UI(QWidget, Ui_Form):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     main_window = UI()
-    main_window.showMaximized()
+    main_window.setStyleSheet("""QScrollBar {\nwidth: 70px;\n}""")
 
-    stylesheet = """QScrollBar {\nwidth: 70px;\n}"""
-    app.setStyleSheet(stylesheet)
+    main_window.showMaximized()
 
     try:
         recognition_thread = RecognitionThread()
