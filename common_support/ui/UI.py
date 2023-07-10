@@ -136,6 +136,7 @@ class Ui_Form(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.btn0.sizePolicy().hasHeightForWidth())
         self.btn0.setSizePolicy(sizePolicy)
+        self.btn0.setMaximumSize(QtCore.QSize(100, 100))
         self.btn0.setText("")
         self.btn0.setObjectName("btn0")
         self.gridLayout_4.addWidget(self.btn0, 0, 0, 1, 1)
@@ -250,7 +251,7 @@ class Ui_Form(object):
         self.gridLayout_3.addWidget(self.widget_3, 0, 2, 1, 1)
 
         self.retranslateUi(Form)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(3)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
