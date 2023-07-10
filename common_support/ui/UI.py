@@ -259,6 +259,9 @@ class Ui_Form(object):
         self.lineEdit.setObjectName("lineEdit")
         self.gridLayout_15.addWidget(self.lineEdit, 0, 1, 1, 1)
         self.PB_weight_input = QtWidgets.QPushButton(self.widget_9)
+        self.PB_weight_input.setStyleSheet("background-color: rgb(0, 0, 0);\n"
+"font: 14pt \"Wide Latin\";\n"
+"color: rgb(255, 0, 0);")
         self.PB_weight_input.setObjectName("PB_weight_input")
         self.gridLayout_15.addWidget(self.PB_weight_input, 0, 0, 1, 1)
         self.gridLayout_9.addWidget(self.widget_9, 1, 0, 1, 1)
