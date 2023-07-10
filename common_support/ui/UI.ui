@@ -113,7 +113,7 @@
            <height>148</height>
           </rect>
          </property>
-         <layout class="QGridLayout" name="gridLayout_14"/>
+         <layout class="QHBoxLayout" name="horizontalLayout"/>
         </widget>
        </widget>
       </item>

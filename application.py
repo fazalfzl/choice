@@ -3,8 +3,8 @@ import os
 import sys
 
 from PyQt5 import QtWidgets, QtGui
-from PyQt5.QtCore import pyqtSlot, pyqtSignal
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QTableWidget, QAbstractItemView
+from PyQt5.QtCore import pyqtSlot, pyqtSignal, Qt
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QTableWidget, QAbstractItemView, QVBoxLayout, QLabel
 
 from common_support.WeightInput import WeightThread
 from common_support.print_bill import print_bill, PrintBillThread
@@ -114,12 +114,23 @@ class UI(QWidget, Ui_Form):
         try:
             self.product_name_list = get_product_name_list()
 
-            # for product_name in self.product_name_list:
-            for index, product_name in enumerate(self.product_name_list):
-                btn = QPushButton(self)
-                btn.setText(product_name)
-                self.SAWC_products.layout().addWidget(btn, 0, index)
+            for index, product in enumerate(self.product_name_list):
+                container = QWidget(self)
+                layout = QVBoxLayout(container)
+                btn: QPushButton = QPushButton(self)
+                btn.setFixedSize(100, 100)
+                container.setFixedSize(140, 140)
+                btn.product = product
                 btn.clicked.connect(self.product_clicked)
+                # btn.setStyleSheet(f"border-image: url('{self.ai_products_dpath}/{product}.gif');")
+                label = QLabel(container)
+                product_details_by_name = get_product_details_by_name(product)
+                price = product_details_by_name['price']
+                label.setText(f"{product} - {price}")
+                label.setAlignment(Qt.AlignCenter)
+                layout.addWidget(btn)
+                layout.addWidget(label)
+                self.SAWC_products.layout().addWidget(container)
         except Exception as e:
             print(e)
 
@@ -204,7 +215,7 @@ class UI(QWidget, Ui_Form):
 
     def product_clicked(self):
         btn: QPushButton = self.sender()
-        self.add_product_to_current_table(btn.text())
+        self.add_product_to_current_table(btn.product)
 
     def search_by_plu(self):
         try:
