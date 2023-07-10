@@ -89,17 +89,20 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>150</height>
+          <height>180</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>150</height>
+          <height>180</height>
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true"/>
+         <string notr="true">QScrollBar {
+width: 70px;
+height: 50px;
+}</string>
         </property>
         <property name="horizontalScrollBarPolicy">
          <enum>Qt::ScrollBarAlwaysOn</enum>
@@ -108,7 +111,14 @@
          <bool>true</bool>
         </property>
         <widget class="QWidget" name="SAWC_products">
-         <layout class="QHBoxLayout" name="horizontalLayout"/>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+         </layout>
         </widget>
        </widget>
       </item>
