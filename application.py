@@ -141,6 +141,22 @@ class UI(QWidget, Ui_Form):
         self.PB_plu.clicked.connect(self.search_by_plu)
         self.PB_qty.clicked.connect(lambda: self.weight_input_clicked(self.lineEdit.text()))
 
+    def print_bill(self):
+
+        try:
+            curr_index = self.tabWidget.currentIndex()
+            tablewidget = None
+            if curr_index == 0:
+                tablewidget = self.tableC1
+            if curr_index == 1:
+                tablewidget = self.tableC2
+            if curr_index == 2:
+                tablewidget = self.tableC3
+
+            print_bill(tablewidget)
+        except Exception as e:
+            print(e)
+
     @property
     def weight(self):
         return self._weight
@@ -193,22 +209,6 @@ class UI(QWidget, Ui_Form):
                 return
             product_name = product_details_by_plu['name']
             self.add_product_to_current_table(product_name)
-        except Exception as e:
-            print(e)
-
-    def print_bill(self):
-
-        try:
-            curr_index = self.tabWidget.currentIndex()
-            tablewidget = None
-            if curr_index == 0:
-                tablewidget = self.tableC1
-            if curr_index == 1:
-                tablewidget = self.tableC2
-            if curr_index == 2:
-                tablewidget = self.tableC3
-
-            print_bill(tablewidget)
         except Exception as e:
             print(e)
 

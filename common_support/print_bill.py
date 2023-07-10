@@ -17,11 +17,8 @@ def print_bill(widget: QTableWidget):
         painter.end()
 
     def table_to_list(tablewidget):
-        # Get the number of rows and columns in the table
         rows = tablewidget.rowCount()
         columns = tablewidget.columnCount()
-
-        # Get the header labels
         header_labels = []
         for col in range(columns):
             item = tablewidget.horizontalHeaderItem(col)
