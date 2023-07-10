@@ -17,7 +17,8 @@ class UI_product_options(QWidget, Ui_Form):
         products= filter_list(strings=self.product_name_list,search_text=label)
 
         for product in products:
-            btn=QPushButton(self)
+            btn:QPushButton=QPushButton(self)
+            btn.setFixedSize(50,50)
             btn.setText(product)
             self.SAWC.layout().addWidget(btn)
             btn.clicked.connect(self.product_clicked)
