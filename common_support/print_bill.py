@@ -1,4 +1,5 @@
 from PyQt5 import QtPrintSupport, QtGui
+from PyQt5.QtCore import QThread, pyqtSignal
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QTableWidget
 
@@ -51,3 +52,16 @@ def print_bill(widget: QTableWidget):
         print_file(image_png="bill.png")
     except Exception as e:
         print("test printing", e)
+
+
+
+class PrintBillThread(QThread):
+    finished = pyqtSignal()  # Signal to indicate that the thread has finished
+
+    def __init__(self, widget):
+        super(PrintBillThread, self).__init__()
+        self.widget = widget
+
+    def run(self):
+        print_bill(self.widget)
+        self.finished.emit()

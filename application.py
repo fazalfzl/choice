@@ -7,7 +7,7 @@ from PyQt5.QtCore import pyqtSlot, pyqtSignal
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QTableWidget, QAbstractItemView
 
 from common_support.WeightInput import WeightThread
-from common_support.print_bill import print_bill
+from common_support.print_bill import print_bill, PrintBillThread
 from common_support.product_options import UI_product_options
 from common_support.rec_thread import RecognitionThread
 from common_support.setup_labels import UI_setup_labels
@@ -142,6 +142,7 @@ class UI(QWidget, Ui_Form):
         self.PB_qty.clicked.connect(lambda: self.weight_input_clicked(self.lineEdit.text()))
 
     def print_bill(self):
+        self.PB_print.setEnabled(False)
 
         try:
             curr_index = self.tabWidget.currentIndex()
@@ -153,7 +154,11 @@ class UI(QWidget, Ui_Form):
             if curr_index == 2:
                 tablewidget = self.tableC3
 
-            print_bill(tablewidget)
+            # print_bill(tablewidget)
+
+            self.thread = PrintBillThread(tablewidget)
+            self.thread.finished.connect(lambda: self.PB_print.setEnabled(True))  # Enable PB_print after self.thread finishes
+            self.thread.start()
         except Exception as e:
             print(e)
 
