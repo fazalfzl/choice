@@ -164,6 +164,7 @@ class UI(QWidget, Ui_Form):
             tablewidget = self.tableC3
 
         tablewidget.clear()
+        tablewidget.setRowCount(0)
     def print_bill(self):
         self.PB_print.setEnabled(False)
 
@@ -180,7 +181,7 @@ class UI(QWidget, Ui_Form):
             # print_bill(tablewidget)
 
             self.thread = PrintBillThread(tablewidget)
-            self.thread.finished.connect(lambda: self.PB_print.setEnabled(True) and self.clear_bill)  # Enable PB_print after self.thread finishes
+            self.thread.finished.connect(lambda: self.PB_print.setEnabled(True) or self.clear_bill())  # Enable PB_print after self.thread finishes
             self.thread.start()
         except Exception as e:
             print(e)
