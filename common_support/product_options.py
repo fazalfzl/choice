@@ -17,8 +17,6 @@ class UI_product_options(QWidget, Ui_Form):
         self.product_name_list = get_product_name_list()
 
         self.add_product_to_current_table=add_product_to_current_table
-
-
         products= filter_list(strings=self.product_name_list,search_text=label)
 
         for product in products:
