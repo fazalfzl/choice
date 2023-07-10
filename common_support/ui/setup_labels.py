@@ -14,14 +14,14 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(555, 377)
+        Form.resize(761, 377)
         self.gridLayout_2 = QtWidgets.QGridLayout(Form)
         self.gridLayout_2.setObjectName("gridLayout_2")
         self.scrollArea = QtWidgets.QScrollArea(Form)
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.widget = QtWidgets.QWidget()
-        self.widget.setGeometry(QtCore.QRect(0, 0, 239, 290))
+        self.widget.setGeometry(QtCore.QRect(0, 0, 371, 290))
         self.widget.setObjectName("widget")
         self.gridLayout = QtWidgets.QGridLayout(self.widget)
         self.gridLayout.setObjectName("gridLayout")
@@ -100,7 +100,7 @@ class Ui_Form(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollArea_2.setObjectName("scrollArea_2")
         self.SAWC_conf_form = QtWidgets.QWidget()
-        self.SAWC_conf_form.setGeometry(QtCore.QRect(0, 0, 242, 207))
+        self.SAWC_conf_form.setGeometry(QtCore.QRect(0, 0, 316, 207))
         self.SAWC_conf_form.setObjectName("SAWC_conf_form")
         self.formLayout = QtWidgets.QFormLayout(self.SAWC_conf_form)
         self.formLayout.setObjectName("formLayout")
@@ -126,7 +126,7 @@ class Ui_Form(object):
         self.gridLayout_2.addWidget(self.widget_5, 0, 1, 1, 1)
 
         self.retranslateUi(Form)
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
