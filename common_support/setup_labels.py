@@ -10,7 +10,7 @@ from common_support.utils import filter_list, load_labels, update_label, change_
 
 conf_list = ['csv_fpath', 'ai_images_dpath', 'labels_fpath', 'model_fpath',
              'name_index', 'price_index', 'code_index', 'unit_index', 'plu_index',
-             'code_length', 'qty_length', 'first_char',"bill_width"]
+             'code_length', 'qty_length', 'first_char',"bill_width","bill_header_size","bill_total_size"]
 
 
 def update_from_github(repo_url="https://github.com/fazalfzl/choice.git"):
