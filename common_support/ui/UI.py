@@ -79,6 +79,7 @@ class Ui_Form(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.SAWC_products = QtWidgets.QWidget()
+        self.SAWC_products.setGeometry(QtCore.QRect(0, 0, 326, 128))
         self.SAWC_products.setObjectName("SAWC_products")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.SAWC_products)
         self.horizontalLayout.setContentsMargins(-1, 0, -1, 0)
@@ -92,6 +93,11 @@ class Ui_Form(object):
         self.gridLayout_6 = QtWidgets.QGridLayout(self.widget_3)
         self.gridLayout_6.setObjectName("gridLayout_6")
         self.tabWidget = QtWidgets.QTabWidget(self.widget_3)
+        self.tabWidget.setStyleSheet("QTabBar::tab {\n"
+"    height: 30px;  /* Adjust the height of the tabs */\n"
+"    width: 120px;  /* Adjust the width of the tabs */\n"
+"    font-size: 16px;  /* Adjust the font size of the tabs */\n"
+"}")
         self.tabWidget.setObjectName("tabWidget")
         self.tabC1 = QtWidgets.QWidget()
         self.tabC1.setObjectName("tabC1")

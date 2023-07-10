@@ -114,6 +114,14 @@ height: 50px;
          <bool>true</bool>
         </property>
         <widget class="QWidget" name="SAWC_products">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>326</width>
+           <height>128</height>
+          </rect>
+         </property>
          <layout class="QHBoxLayout" name="horizontalLayout">
           <property name="topMargin">
            <number>0</number>
@@ -133,6 +141,13 @@ height: 50px;
      <layout class="QGridLayout" name="gridLayout_6" rowstretch="1,0">
       <item row="0" column="0">
        <widget class="QTabWidget" name="tabWidget">
+        <property name="styleSheet">
+         <string notr="true">QTabBar::tab {
+    height: 30px;  /* Adjust the height of the tabs */
+    width: 120px;  /* Adjust the width of the tabs */
+    font-size: 16px;  /* Adjust the font size of the tabs */
+}</string>
+        </property>
         <property name="currentIndex">
          <number>0</number>
         </property>
