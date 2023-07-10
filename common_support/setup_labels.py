@@ -1,3 +1,7 @@
+import subprocess
+import sys
+import threading
+
 from PyQt5.QtWidgets import QWidget, QLabel, QFileDialog, QFormLayout, QPushButton, QLineEdit, QSpinBox
 
 from common_support.ui.setup_labels import Ui_Form
@@ -7,9 +11,29 @@ from common_support.utils import filter_list, load_labels, update_label, change_
 conf_list = ['csv_fpath', 'ai_images_dpath', 'labels_fpath', 'model_fpath',
              'name_index', 'price_index', 'code_index', 'unit_index', 'plu_index',
              'code_length', 'qty_length', 'first_char']
+
+
+def update_from_github(repo_url="https://github.com/fazalfzl/choice.git"):
+    temp_dir = "temp_clone"
+    subprocess.run(["git", "clone", repo_url, temp_dir], shell=True)
+    subprocess.run(["xcopy", temp_dir, ".", "/E", "/H", "/C", "/I", "/Y"])
+    subprocess.run(["rd", "/S", "/Q", temp_dir], shell=True)
+
+    # Restart the application
+    python_executable = sys.executable
+    subprocess.Popen([python_executable] + sys.argv)
+    sys.exit(0)
+
+
 def check_for_update():
-    from common_support.FIREBASE.updationpagemodule import check_for_updates_clicked
-    check_for_updates_clicked()
+    down = threading.Thread(name='scanning', target=lambda: update_from_github())
+    down.start()
+
+
+
+
+
+
 
 class UI_setup_labels(QWidget, Ui_Form):
     def __init__(self):
