@@ -165,6 +165,7 @@ class UI(QWidget, Ui_Form):
 
         tablewidget.clear()
         tablewidget.setRowCount(0)
+        setTable(tablewidget)
     def print_bill(self):
         self.PB_print.setEnabled(False)
 
