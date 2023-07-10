@@ -71,9 +71,10 @@ class Ui_Form(object):
         self.scrollArea.setMinimumSize(QtCore.QSize(0, 180))
         self.scrollArea.setMaximumSize(QtCore.QSize(16777215, 180))
         self.scrollArea.setStyleSheet("QScrollBar {\n"
-"width: 70px;\n"
+"width: 80px;\n"
 "height: 50px;\n"
 "}")
+        self.scrollArea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.scrollArea.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")

@@ -100,9 +100,12 @@
         </property>
         <property name="styleSheet">
          <string notr="true">QScrollBar {
-width: 70px;
+width: 80px;
 height: 50px;
 }</string>
+        </property>
+        <property name="verticalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
         </property>
         <property name="horizontalScrollBarPolicy">
          <enum>Qt::ScrollBarAlwaysOn</enum>
