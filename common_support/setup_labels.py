@@ -59,6 +59,7 @@ class UI_setup_labels(QWidget, Ui_Form):
                     view.textChanged.connect(self.conf_updation)
                 else:
                     view = QSpinBox(self)
+                    view.setMaximum(1000)
                     view.valueChanged.connect(self.conf_updation)
 
                 view.conf = conf
