@@ -7,8 +7,8 @@ def update_from_github(repo_url="https://github.com/fazalfzl/choice.git"):
     temp_dir = "temp_clone"
     subprocess.run(["git", "clone", repo_url, temp_dir], shell=True)
 
-    # Copy the contents of the cloned repository to the current working directory
-    subprocess.run(["xcopy", temp_dir, ".", "/E", "/H", "/C", "/I"])
+    # Copy the contents of the cloned repository to the current working directory, overwriting existing files
+    subprocess.run(["xcopy", temp_dir, ".", "/E", "/H", "/C", "/I", "/Y"])
 
     # Remove the temporary directory
     subprocess.run(["rd", "/S", "/Q", temp_dir], shell=True)
