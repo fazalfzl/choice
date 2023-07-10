@@ -105,6 +105,7 @@ class UI(QWidget, Ui_Form):
         setTable(self.tableC3)
 
         self.PB_setup_labels.clicked.connect(self.show_setup_labels)
+        self.PB_delete_row.clicked.connect(self.delete_row)
 
         self.PB_print.clicked.connect(self.print_bill)
 
@@ -209,9 +210,17 @@ class UI(QWidget, Ui_Form):
         if row_count <= 0:
             return
 
-        qty_item = tablewidget.item(row_count - 1, 2)
-        price_item = tablewidget.item(row_count - 1, 1)
-        amount_item = tablewidget.item(row_count - 1, 3)
+        selected_items = tablewidget.selectedItems()
+        if selected_items:
+            selected_row = selected_items[0].row()
+        else:
+            selected_row = row_count - 1
+
+
+
+        qty_item = tablewidget.item(selected_row, 2)
+        price_item = tablewidget.item(selected_row, 1)
+        amount_item = tablewidget.item(selected_row, 3)
 
         # qty_item.setText(self.PB_weight_input.text() if qty == "" else qty)
         qty_item.setText(self.PB_weight_input.text() if qty == "" else str(qty))
@@ -303,6 +312,18 @@ class UI(QWidget, Ui_Form):
                 btn.setStyleSheet(f"border-image: url('{self.ai_images_dpath}/{self.labels[i]}.gif');")
         except Exception as e:
             print(e)
+
+    def delete_row(self):
+        tablewidget = self.get_current_table()
+        if not tablewidget:
+            return
+
+        selected_items = tablewidget.selectedItems()
+        if selected_items:
+            selected_row = selected_items[0].row()
+            tablewidget.removeRow(selected_row)
+        else:
+            tablewidget.removeRow(tablewidget.rowCount() - 1)
 
 
 if __name__ == "__main__":
