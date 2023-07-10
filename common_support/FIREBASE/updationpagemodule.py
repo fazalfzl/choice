@@ -12,7 +12,7 @@ from firebase_admin import storage
 
 from common_support.FIREBASE.firebase_initializer import initialize_app
 
-version = "0"
+version = "00"
 if os.getenv("lazafron_version"):
     version = os.getenv("lazafron_version")
 
