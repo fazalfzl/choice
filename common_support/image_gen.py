@@ -1,3 +1,5 @@
+import math
+
 import qrcode
 from PIL import Image, ImageDraw, ImageFont
 
@@ -21,11 +23,10 @@ def generate_bill(table_data=None):
     config = Config()
     bill_width = config.get("bill_width") or 400
     bill_width = float(bill_width)
-    height = 600
     dpi = 1200
     qr_size = 200
     table_cell_height = 50
-    cell_widths = [int(bill_width / 2.5), int(bill_width / 5.2), int(bill_width / 5.2), int(bill_width / 4)]
+    cell_widths = [math.floor(bill_width / 2.5), math.floor(bill_width / 5.2), math.floor(bill_width / 5.2), math.floor(bill_width / 4)]
     table_header_font = ImageFont.truetype('arialbd.ttf', 18)  # Use a bold font for table headers
     table_content_font = ImageFont.truetype('arialbd.ttf', 16)  # Use a bold font for table content
     total_font = ImageFont.truetype('arialbd.ttf', 25)
