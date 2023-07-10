@@ -72,6 +72,11 @@ class Ui_Form(object):
         self.gridLayout_6 = QtWidgets.QGridLayout(self.widget_6)
         self.gridLayout_6.setObjectName("gridLayout_6")
         self.tabWidget = QtWidgets.QTabWidget(self.widget_6)
+        self.tabWidget.setStyleSheet("QTabBar::tab {\n"
+"    height: 30px;  /* Adjust the height of the tabs */\n"
+"    width: 120px;  /* Adjust the width of the tabs */\n"
+"    font-size: 16px;  /* Adjust the font size of the tabs */\n"
+"}")
         self.tabWidget.setObjectName("tabWidget")
         self.tab = QtWidgets.QWidget()
         self.tab.setObjectName("tab")
@@ -95,7 +100,7 @@ class Ui_Form(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollArea_2.setObjectName("scrollArea_2")
         self.SAWC_conf_form = QtWidgets.QWidget()
-        self.SAWC_conf_form.setGeometry(QtCore.QRect(0, 0, 242, 219))
+        self.SAWC_conf_form.setGeometry(QtCore.QRect(0, 0, 242, 207))
         self.SAWC_conf_form.setObjectName("SAWC_conf_form")
         self.formLayout = QtWidgets.QFormLayout(self.SAWC_conf_form)
         self.formLayout.setObjectName("formLayout")
@@ -108,6 +113,11 @@ class Ui_Form(object):
         self.gridLayout_9 = QtWidgets.QGridLayout(self.tab_3)
         self.gridLayout_9.setObjectName("gridLayout_9")
         self.PB_check_updates = QtWidgets.QPushButton(self.tab_3)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.PB_check_updates.sizePolicy().hasHeightForWidth())
+        self.PB_check_updates.setSizePolicy(sizePolicy)
         self.PB_check_updates.setObjectName("PB_check_updates")
         self.gridLayout_9.addWidget(self.PB_check_updates, 0, 0, 1, 1)
         self.tabWidget.addTab(self.tab_3, "")
@@ -116,7 +126,7 @@ class Ui_Form(object):
         self.gridLayout_2.addWidget(self.widget_5, 0, 1, 1, 1)
 
         self.retranslateUi(Form)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):

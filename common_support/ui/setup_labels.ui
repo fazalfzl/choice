@@ -95,8 +95,15 @@
         <layout class="QGridLayout" name="gridLayout_6">
          <item row="0" column="0">
           <widget class="QTabWidget" name="tabWidget">
+           <property name="styleSheet">
+            <string notr="true">QTabBar::tab {
+    height: 30px;  /* Adjust the height of the tabs */
+    width: 120px;  /* Adjust the width of the tabs */
+    font-size: 16px;  /* Adjust the font size of the tabs */
+}</string>
+           </property>
            <property name="currentIndex">
-            <number>0</number>
+            <number>2</number>
            </property>
            <widget class="QWidget" name="tab">
             <attribute name="title">
@@ -127,7 +134,7 @@
                      <x>0</x>
                      <y>0</y>
                      <width>242</width>
-                     <height>219</height>
+                     <height>207</height>
                     </rect>
                    </property>
                    <layout class="QFormLayout" name="formLayout"/>
@@ -146,6 +153,12 @@
             <layout class="QGridLayout" name="gridLayout_9">
              <item row="0" column="0">
               <widget class="QPushButton" name="PB_check_updates">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="text">
                 <string>CHECK FOR UPDATES</string>
                </property>
