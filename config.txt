@@ -1,0 +1,12 @@
+csv_fpath=C:/Users/mhdfa/OneDrive/Desktop/CHOICE/PLU.CSV
+ai_images_dpath=C:/Users/mhdfa/OneDrive/Desktop/CHOICE/img
+labels_fpath=C:/Users/mhdfa/OneDrive/Desktop/CHOICE/labels.txt
+model_fpath=C:/Users/mhdfa/OneDrive/Desktop/CHOICE/trained_efficientnet.h5
+name_index=3
+price_index=4
+unit_index=5
+plu_index=1
+code_index=2
+code_length=6
+qty_length=5
+first_char=#
