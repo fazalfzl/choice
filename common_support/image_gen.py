@@ -3,12 +3,14 @@ from PIL import Image, ImageDraw, ImageFont
 
 from common_support.utils import get_product_details_by_name, Config
 
-width = 400
+config = Config()
+
+bill_width = config.get("bill_width")
 height = 600
 dpi = 1200
 qr_size = 200
 table_cell_height = 50
-cell_widths = [int(width/2.5), int(width/5.2), int(width/5.2), int(width/4)]
+cell_widths = [int(bill_width/2.5), int(bill_width/5.2), int(bill_width/5.2), int(bill_width/4)]
 table_header_font = ImageFont.truetype('arialbd.ttf', 18)  # Use a bold font for table headers
 table_content_font = ImageFont.truetype('arialbd.ttf', 16)  # Use a bold font for table content
 total_font = ImageFont.truetype('arialbd.ttf', 25)
@@ -28,7 +30,7 @@ def add_newline_to_table_data(table_data):
 
 def generate_bill(table_data=None):
     height = (len(table_data)+1)*table_cell_height + 20000
-    image = Image.new('RGB', (width, height), 'white')
+    image = Image.new('RGB', (bill_width, height), 'white')
     draw = ImageDraw.Draw(image)
     # Draw table headers
     for i, header in enumerate(headers):
@@ -89,7 +91,7 @@ def generate_bill(table_data=None):
 
     # Paste the QR code at the bottom of the bill
     qr_position = (
-    width // 2 - qr_image.width // 2, (len(table_data) + 2) * row_height)  # Adjust the position as needed
+    bill_width // 2 - qr_image.width // 2, (len(table_data) + 2) * row_height)  # Adjust the position as needed
     image.paste(qr_image, qr_position)
 
     # Save the bill as a PNG file
