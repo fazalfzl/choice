@@ -18,8 +18,7 @@ class WeightThread(QThread):
         list_of_last_values = ["", "", ""]
 
         try:
-            serial_port = next(
-                (serial.Serial(port, 2400, timeout=10) for port in ("COM4","COM3") if port), None)
+            serial_port = serial.Serial('COM4', 2400)
             print(serial_port)
             if serial_port is None:
                 return
