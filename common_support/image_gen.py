@@ -19,16 +19,17 @@ def add_newline_to_table_data(table_data):
 
 def generate_bill(table_data=None):
     config = Config()
-    bill_width = config.get("bill_width") or 400
-    bill_width = int(bill_width)
+    bill_width = int(config.get("bill_width") or 400)
+    bill_header_size = int(config.get("bill_header_size") or 18)
+    bill_total_size = int(config.get("bill_total_size") or 25)
     height = 600
     dpi = 1200
     qr_size = 200
     table_cell_height = 50
     cell_widths = [int(bill_width / 2.5), int(bill_width / 5.2), int(bill_width / 5.2), int(bill_width / 4)]
-    table_header_font = ImageFont.truetype('arialbd.ttf', 18)  # Use a bold font for table headers
-    table_content_font = ImageFont.truetype('arialbd.ttf', 16)  # Use a bold font for table content
-    total_font = ImageFont.truetype('arialbd.ttf', 25)
+    table_header_font = ImageFont.truetype('arialbd.ttf', bill_header_size)  # Use a bold font for table headers
+    table_content_font = ImageFont.truetype('arialbd.ttf', bill_header_size-2)  # Use a bold font for table content
+    total_font = ImageFont.truetype('arialbd.ttf', bill_total_size)
     headers = ['Item', 'Price', 'Qty', 'Amount']
 
     height = (len(table_data)+1)*table_cell_height + 20000
