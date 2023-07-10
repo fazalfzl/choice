@@ -151,32 +151,19 @@ class UI(QWidget, Ui_Form):
         self.PB_empty.clicked.connect(lambda: self.lineEdit.setText(""))
 
         self.PB_plu.clicked.connect(self.search_by_plu)
-        self.PB_qty.clicked.connect(lambda: self.weight_input_clicked(self.lineEdit.text()))
+        self.PB_qty.clicked.connect(lambda: self.weight_input_clicked(self.lineEdit.text()) or self.lineEdit.setText(""))
+        self.tabWidget.currentChanged.connect(self.update_total)
+
 
     def clear_bill(self):
-        curr_index = self.tabWidget.currentIndex()
-        tablewidget:QTableWidget = None
-        if curr_index == 0:
-            tablewidget = self.tableC1
-        if curr_index == 1:
-            tablewidget = self.tableC2
-        if curr_index == 2:
-            tablewidget = self.tableC3
-
+        tablewidget = self.get_current_table()
         tablewidget.clear()
         tablewidget.setRowCount(0)
         setTable(tablewidget)
     def print_bill(self):
         self.PB_print.setEnabled(False)
         try:
-            curr_index = self.tabWidget.currentIndex()
-            tablewidget = None
-            if curr_index == 0:
-                tablewidget = self.tableC1
-            if curr_index == 1:
-                tablewidget = self.tableC2
-            if curr_index == 2:
-                tablewidget = self.tableC3
+            tablewidget = self.get_current_table()
 
             # print_bill(tablewidget)
 
@@ -185,6 +172,15 @@ class UI(QWidget, Ui_Form):
             self.thread.start()
         except Exception as e:
             print(e)
+
+    def update_total(self):
+        tablewidget = self.get_current_table()
+        total_amount=0
+        rows = tablewidget.rowCount()
+        for row in range(rows):
+            item = tablewidget.item(row, 3)
+            total_amount+=float(item.text())
+        self.label_total.setText(str(total_amount))
 
     @property
     def weight(self):
@@ -199,14 +195,7 @@ class UI(QWidget, Ui_Form):
         self.PB_weight_input.setText(weight)
 
     def weight_input_clicked(self, qty=""):
-        curr_index = self.tabWidget.currentIndex()
-        tablewidget = None
-        if curr_index == 0:
-            tablewidget = self.tableC1
-        if curr_index == 1:
-            tablewidget = self.tableC2
-        if curr_index == 2:
-            tablewidget = self.tableC3
+        tablewidget = self.get_current_table()
 
         row_count = tablewidget.rowCount()
         if row_count <= 0:
@@ -224,6 +213,7 @@ class UI(QWidget, Ui_Form):
         amount_text = str(amount)
         if amount_item is not None:
             amount_item.setText(amount_text)
+        self.update_total()
 
     def product_clicked(self):
         btn: QPushButton = self.sender()
@@ -257,19 +247,25 @@ class UI(QWidget, Ui_Form):
     def add_product_to_current_table(self, product_name):
 
         try:
-            curr_index = self.tabWidget.currentIndex()
-            tablewidget = None
-            if curr_index == 0:
-                tablewidget = self.tableC1
-            if curr_index == 1:
-                tablewidget = self.tableC2
-            if curr_index == 2:
-                tablewidget = self.tableC3
+            tablewidget = self.get_current_table()
 
             add_to_bill(product_name, tablewidget, weight_input=self.PB_weight_input.text())
             tablewidget.scrollToBottom()
+            self.update_total()
+
         except Exception as e:
             print(e)
+
+    def get_current_table(self):
+        curr_index = self.tabWidget.currentIndex()
+        tablewidget = None
+        if curr_index == 0:
+            tablewidget = self.tableC1
+        if curr_index == 1:
+            tablewidget = self.tableC2
+        if curr_index == 2:
+            tablewidget = self.tableC3
+        return tablewidget
 
     def show_setup_labels(self):
         try:
