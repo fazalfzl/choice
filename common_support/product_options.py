@@ -18,8 +18,9 @@ class UI_product_options(QWidget, Ui_Form):
 
         for product in products:
             btn:QPushButton=QPushButton(self)
-            btn.setFixedSize(50,50)
+            btn.setFixedSize(100,100)
             btn.setText(product)
+            btn.setStyleSheet(f"border-image: url('{self.ai_products_dpath}/{product}.gif');")
             self.SAWC.layout().addWidget(btn)
             btn.clicked.connect(self.product_clicked)
 
