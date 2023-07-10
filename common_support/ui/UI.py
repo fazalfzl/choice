@@ -162,7 +162,12 @@ class Ui_Form(object):
         self.gridLayout_10 = QtWidgets.QGridLayout(self.widget_5)
         self.gridLayout_10.setObjectName("gridLayout_10")
         self.widget_7 = QtWidgets.QWidget(self.widget_5)
-        self.widget_7.setStyleSheet("QPushButton {    width: 50px; height: 50px;}")
+        self.widget_7.setStyleSheet("QPushButton {    width: 50px; height: 50px;\n"
+"background-color: rgb(0, 255, 255);\n"
+"color: rgb(0, 85, 0);\n"
+"    font: 75 24pt \"MS Shell Dlg 2\";\n"
+"}\n"
+"")
         self.widget_7.setObjectName("widget_7")
         self.gridLayout_11 = QtWidgets.QGridLayout(self.widget_7)
         self.gridLayout_11.setObjectName("gridLayout_11")

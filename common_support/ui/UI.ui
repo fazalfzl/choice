@@ -240,7 +240,12 @@ background-color: rgb(255, 255, 127);
             <item row="1" column="0">
              <widget class="QWidget" name="widget_7" native="true">
               <property name="styleSheet">
-               <string notr="true">QPushButton {    width: 50px; height: 50px;}</string>
+               <string notr="true">QPushButton {    width: 50px; height: 50px;
+background-color: rgb(0, 255, 255);
+color: rgb(0, 85, 0);
+	font: 75 24pt &quot;MS Shell Dlg 2&quot;;
+}
+</string>
               </property>
               <layout class="QGridLayout" name="gridLayout_11">
                <item row="0" column="0">
