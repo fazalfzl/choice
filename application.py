@@ -92,7 +92,7 @@ class UI(QWidget, Ui_Form):
         super(UI, self).__init__()
         self.config = Config()
         self.ai_images_dpath = self.config.get('ai_images_dpath')
-
+        self.ai_products_dpath = self.config.get('ai_products_dpath')
         self.ui_product_options = None
         self.setup_labels_window = None
 
@@ -122,7 +122,7 @@ class UI(QWidget, Ui_Form):
                 container.setFixedSize(140, 140)
                 btn.product = product
                 btn.clicked.connect(self.product_clicked)
-                # btn.setStyleSheet(f"border-image: url('{self.ai_products_dpath}/{product}.gif');")
+                btn.setStyleSheet(f"border-image: url('{self.ai_products_dpath}/{product}.gif');")
                 label = QLabel(container)
                 product_details_by_name = get_product_details_by_name(product)
                 price = product_details_by_name['price']
