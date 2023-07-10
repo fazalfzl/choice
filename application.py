@@ -186,7 +186,7 @@ class UI(QWidget, Ui_Form):
         for row in range(rows):
             item = tablewidget.item(row, 3)
             total_amount+=float(item.text())
-        self.label_total.setText(f"${total_amount:.2f}")
+        self.label_total.setText(f"{total_amount:.2f}")
 
     @property
     def weight(self):
