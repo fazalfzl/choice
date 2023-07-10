@@ -114,10 +114,11 @@ class UI(QWidget, Ui_Form):
         try:
             self.product_name_list = get_product_name_list()
 
-            for product_name in self.product_name_list:
+            # for product_name in self.product_name_list:
+            for index, product_name in enumerate(self.product_name_list):
                 btn = QPushButton(self)
                 btn.setText(product_name)
-                self.SAWC_products.layout().addWidget(btn)
+                self.SAWC_products.layout().addWidget(btn, 0, index)
                 btn.clicked.connect(self.product_clicked)
         except Exception as e:
             print(e)
