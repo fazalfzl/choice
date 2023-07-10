@@ -157,6 +157,8 @@ class UI(QWidget, Ui_Form):
 
     def clear_bill(self):
         tablewidget = self.get_current_table()
+        if not tablewidget :
+            return
         tablewidget.clear()
         tablewidget.setRowCount(0)
         setTable(tablewidget)
@@ -164,8 +166,10 @@ class UI(QWidget, Ui_Form):
         self.PB_print.setEnabled(False)
         try:
             tablewidget = self.get_current_table()
+            if not tablewidget:
+                return
 
-            # print_bill(tablewidget)
+                # print_bill(tablewidget)
 
             self.thread = PrintBillThread(tablewidget)
             self.thread.finished.connect(lambda: self.PB_print.setEnabled(True) or self.clear_bill())  # Enable PB_print after self.thread finishes
@@ -175,6 +179,8 @@ class UI(QWidget, Ui_Form):
 
     def update_total(self):
         tablewidget = self.get_current_table()
+        if not tablewidget :
+            return
         total_amount=0
         rows = tablewidget.rowCount()
         for row in range(rows):
@@ -196,6 +202,8 @@ class UI(QWidget, Ui_Form):
 
     def weight_input_clicked(self, qty=""):
         tablewidget = self.get_current_table()
+        if not tablewidget :
+            return
 
         row_count = tablewidget.rowCount()
         if row_count <= 0:
@@ -248,6 +256,8 @@ class UI(QWidget, Ui_Form):
 
         try:
             tablewidget = self.get_current_table()
+            if not tablewidget:
+                return
 
             add_to_bill(product_name, tablewidget, weight_input=self.PB_weight_input.text())
             tablewidget.scrollToBottom()
@@ -261,10 +271,12 @@ class UI(QWidget, Ui_Form):
         tablewidget = None
         if curr_index == 0:
             tablewidget = self.tableC1
-        if curr_index == 1:
+        elif curr_index == 1:
             tablewidget = self.tableC2
-        if curr_index == 2:
+        elif curr_index == 2:
             tablewidget = self.tableC3
+        else:
+            return False
         return tablewidget
 
     def show_setup_labels(self):
