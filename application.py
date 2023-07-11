@@ -40,7 +40,7 @@ def add_to_bill(product_name, tablewidget, weight_input):
         name_text = str(product_details_by_name["name"])
         price_text = str(product_details_by_name["price"])
         unit = product_details_by_name["unit"]
-        qty_text = str(weight_input if unit == 'KG' else "1")
+        qty_text = str(weight_input if unit == 'KG' or '0' else "1")
         amount = float(product_details_by_name["price"]) * float(qty_text)
         amount = round(amount, 2)
         amount_text = str(amount)
@@ -115,6 +115,19 @@ class UI(QWidget, Ui_Form):
         try:
             self.product_name_list = get_product_name_list()
 
+            products_with_image = []
+
+            for product in self.product_name_list:
+                prod_image_gif_file_path = f"{self.ai_products_dpath}/{product}.gif"
+
+                if os.path.exists(prod_image_gif_file_path):
+                    products_with_image.append(product)
+
+            # Sort the product_name_list based on the availability of images
+            self.product_name_list = sorted(self.product_name_list, key=lambda x: x not in products_with_image)
+
+            # products_with_image will contain the products with images sorted first
+
             for index, product in enumerate(self.product_name_list):
                 container = QWidget(self)
                 layout = QVBoxLayout(container)
@@ -123,7 +136,11 @@ class UI(QWidget, Ui_Form):
                 container.setFixedSize(140, 140)
                 btn.product = product
                 btn.clicked.connect(self.product_clicked)
-                btn.setStyleSheet(f"border-image: url('{self.ai_products_dpath}/{product}.gif');")
+
+                style=f"border-image: url('{self.ai_products_dpath}/{product}.gif');"
+                btn.setStyleSheet(style)
+                print(style)
+
                 label = QLabel(container)
                 product_details_by_name = get_product_details_by_name(product)
                 price = product_details_by_name['price']
@@ -255,7 +272,7 @@ class UI(QWidget, Ui_Form):
             print(label)
             if self.ui_product_options:
                 self.ui_product_options.close()
-            self.ui_product_options = UI_product_options(label=label,
+            self.ui_product_options = UI_product_options(ai_label=label,
                                                          add_product_to_current_table=self.add_product_to_current_table)
             self.ui_product_options.show()
         except Exception as e:

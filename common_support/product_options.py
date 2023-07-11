@@ -1,3 +1,5 @@
+import os
+
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget, QLabel, QPushButton, QVBoxLayout
 
@@ -6,16 +8,17 @@ from common_support.utils import filter_list, get_product_name_list, Config, get
 
 
 class UI_product_options(QWidget, Ui_Form):
-    def __init__(self, label="", add_product_to_current_table=None):
+    def __init__(self, ai_label="", add_product_to_current_table=None):
         super(UI_product_options, self).__init__()
         self.config = Config()
         self.ai_products_dpath = self.config.get('ai_products_dpath')
+        self.ai_images_dpath = self.config.get('ai_images_dpath')
 
         self.setupUi(self)
-        self.label.setText(label)
+        self.label.setText(ai_label)
         self.product_name_list = get_product_name_list()
         self.add_product_to_current_table=add_product_to_current_table
-        products= filter_list(strings=self.product_name_list,search_text=label)
+        products= filter_list(strings=self.product_name_list, search_text=ai_label)
 
         for product in products:
             container = QWidget(self)
@@ -25,14 +28,21 @@ class UI_product_options(QWidget, Ui_Form):
             container.setFixedSize(140,140)
             btn.product=product
             btn.clicked.connect(self.product_clicked)
-            btn.setStyleSheet(f"border-image: url('{self.ai_products_dpath}/{product}.gif');")
-            label = QLabel(container)
+
+            prod_image_gif_file_path = f"{self.ai_products_dpath}/{product}.gif"
+
+            if not os.path.exists(prod_image_gif_file_path):
+                prod_image_gif_file_path = f"{self.ai_images_dpath}/{ai_label}.gif"
+            # print(prod_image_gif_file_path)
+            btn.setStyleSheet(f"border-image: url('{prod_image_gif_file_path}');")
+
+            qlabel = QLabel(container)
             product_details_by_name = get_product_details_by_name(product)
             price = product_details_by_name['price']
-            label.setText(f"{product} - {price}")
-            label.setAlignment(Qt.AlignCenter)
+            qlabel.setText(f"{product} - {price}")
+            qlabel.setAlignment(Qt.AlignCenter)
             layout.addWidget(btn)
-            layout.addWidget(label)
+            layout.addWidget(qlabel)
             self.SAWC.layout().addWidget(container)
 
 
