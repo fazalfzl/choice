@@ -79,7 +79,7 @@ def generate_bill(table_data=None):
 
     # Draw the total amount at the bottom in a larger font
     # total_text = f"Total amount: ${total_amount}"
-    total_text = f"Total amount: ${total_amount:.2f}"
+    total_text = f"Total amount: {total_amount:.2f}"
 
     total_position = (0, (len(table_data) + 1) * row_height)
     draw.text((total_position[0] + 10, total_position[1] + 10), total_text, fill='black', font=total_font)
