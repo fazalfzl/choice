@@ -59,7 +59,7 @@ def generate_bill(table_data=None):
         product_details = get_product_details_by_name(row[0])
         code = product_details['code'].zfill(code_length)
         qty = str(row[2].replace('.', "")).zfill(qty_length)  # Ensure qty is 5 characters long with leading zeros
-        qr_text += f"{first_char}{code}{qty}\r\n"
+        qr_text += f"{first_char}{code}{qty}\n"
 
     print(qr_text)
 
