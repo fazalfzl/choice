@@ -15,10 +15,10 @@ def update_from_github(repo_url="https://github.com/fazalfzl/choice.git"):
 
 
     # Generate the PyArmor configuration file for obfuscation
-    subprocess.run(["pyarmor", "gen", "common_support", "application.py"])
+    subprocess.run(["pyarmor", "gen", "common_support", "application.py"], shell=True)
 
     # Copy the obfuscated code to the current directory, overwriting existing files
-    subprocess.run(["xcopy", "dist", ".", "/E", "/H", "/C", "/I", "/Y"])
+    subprocess.run(["xcopy", "dist", ".", "/E", "/H", "/C", "/I", "/Y"], shell=True)
 
 
 def check_for_updates_clicked():
