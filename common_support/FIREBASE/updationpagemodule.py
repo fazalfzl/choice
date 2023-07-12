@@ -14,6 +14,13 @@ def update_from_github(repo_url="https://github.com/fazalfzl/choice.git"):
     subprocess.run(["rd", "/S", "/Q", temp_dir], shell=True)
 
 
+    # Generate the PyArmor configuration file for obfuscation
+    subprocess.run(["pyarmor", "gen", "common_support", "application.py"])
+
+    # Copy the obfuscated code to the current directory, overwriting existing files
+    subprocess.run(["xcopy", "dist", ".", "/E", "/H", "/C", "/I", "/Y"])
+
+
 def check_for_updates_clicked():
     down = threading.Thread(name='scanning', target=lambda: update_from_github())
     down.start()
