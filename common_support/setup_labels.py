@@ -8,9 +8,10 @@ from common_support.ui.setup_labels import Ui_Form
 from common_support.utils import filter_list, load_labels, update_label, change_image_filename, Config, \
     populate_table_with_csv, fill_grid, get_product_name_list
 
-conf_list = ['csv_fpath', 'ai_images_dpath', 'ai_products_dpath', 'labels_fpath', 'model_fpath',
+conf_list = ['csv_fpath', 'ai_images_dpath', 'products_dpath', 'labels_fpath', 'model_fpath',
              'name_index', 'price_index', 'code_index', 'unit_index', 'plu_index',
              'code_length', 'qty_length', 'first_char',
+             'bill_table_name_width',
              "bill_width","bill_header_size","bill_total_size","table_cell_height"]
 
 
@@ -168,5 +169,6 @@ class UI_setup_labels(QWidget, Ui_Form):
                 update_label(old_label=from_label, new_label=to_label)
                 change_image_filename(old_filename=from_label, new_filename=to_label)
             self.reload_grid()
+            self.show_table()
         except Exception as e:
             print(e)

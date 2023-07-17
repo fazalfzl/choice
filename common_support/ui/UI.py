@@ -69,8 +69,8 @@ class Ui_Form(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.scrollArea.sizePolicy().hasHeightForWidth())
         self.scrollArea.setSizePolicy(sizePolicy)
-        self.scrollArea.setMinimumSize(QtCore.QSize(0, 180))
-        self.scrollArea.setMaximumSize(QtCore.QSize(16777215, 180))
+        self.scrollArea.setMinimumSize(QtCore.QSize(0, 200))
+        self.scrollArea.setMaximumSize(QtCore.QSize(16777215, 200))
         self.scrollArea.setStyleSheet("QScrollBar {\n"
 "width: 80px;\n"
 "height: 50px;\n"
@@ -80,7 +80,7 @@ class Ui_Form(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.SAWC_products = QtWidgets.QWidget()
-        self.SAWC_products.setGeometry(QtCore.QRect(0, 0, 562, 128))
+        self.SAWC_products.setGeometry(QtCore.QRect(0, 0, 562, 148))
         self.SAWC_products.setObjectName("SAWC_products")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.SAWC_products)
         self.horizontalLayout.setContentsMargins(-1, 0, -1, 0)

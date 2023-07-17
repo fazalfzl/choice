@@ -1,4 +1,3 @@
-
 import os
 import sys
 
@@ -21,15 +20,88 @@ os.environ["lazafron_version"] = str(version)
 os.environ["lazafron_pathtodir"] = path_to_dir
 
 
+def initialize_window_layout(main_window_object):
+    config = Config()
+    ai_images_dpath = config.get('ai_images_dpath')
+    products_dpath = config.get('products_dpath')
+    try:
+        product_name_list = get_product_name_list()
+        products_with_file = [product for product in product_name_list if
+                              any(file.startswith(product) for file in os.listdir(products_dpath))]
+        product_name_list = sorted(product_name_list, key=lambda x: x not in products_with_file)
+
+        layout = main_window_object.SAWC_products.layout()
+        for index, product in enumerate(product_name_list):
+            container = QWidget(main_window_object)
+            layout.addWidget(container)
+
+            btn = QPushButton(main_window_object)
+            btn.setFixedSize(100, 100)
+            container.setFixedSize(140, 140)
+            btn.product = product
+            btn.clicked.connect(main_window_object.product_clicked)
+
+            files_with_prefix = [file for file in os.listdir(products_dpath) if file.startswith(product)]
+            file_path = f"{products_dpath}/{files_with_prefix[0]}" if files_with_prefix else 'default_image.png'
+            style = f"border-image: url('{file_path}');"
+            btn.setStyleSheet(style)
+
+            label = QLabel(container)
+            product_details_by_name = get_product_details_by_name(product)
+            price = product_details_by_name['price']
+            label.setText(f"{product} - {price}")
+            label.setAlignment(Qt.AlignCenter)
+
+            inner_layout = QVBoxLayout(container)
+            inner_layout.addWidget(btn)
+            inner_layout.addWidget(label)
+
+        return ai_images_dpath
+
+    except Exception as e:
+        print(e)
+
+
+def update_weight_input(tablewidget, qty_item, price_item, amount_item, pb_weight_input):
+    row_count = tablewidget.rowCount()
+    if row_count <= 0:
+        return
+
+    selected_items = tablewidget.selectedItems()
+    if selected_items:
+        selected_row = selected_items[0].row()
+    else:
+        selected_row = row_count - 1
+
+    qty = pb_weight_input.text() if not qty_item else str(pb_weight_input)
+
+    qty_item.setText(qty)
+
+    amount = float(price_item.text()) * float(qty_item.text())
+    amount = round(amount, 2)
+    amount_text = str(amount)
+    if amount_item is not None:
+        amount_item.setText(amount_text)
+
+
+def calculate_total(tablewidget):
+    if not tablewidget:
+        return 0
+    total_amount = 0
+    rows = tablewidget.rowCount()
+    for row in range(rows):
+        item = tablewidget.item(row, 3)
+        total_amount += float(item.text())
+    return total_amount
 
 
 def setTable(table: QTableWidget):
+    config = Config()
     headers = ['ITEM', 'PRICE', 'QTY', 'AMOUNT']
     table.setColumnCount(len(headers))
     table.setHorizontalHeaderLabels(headers)
-
-    # Set the table as read-only
     table.setEditTriggers(QAbstractItemView.NoEditTriggers)
+    table.setColumnWidth(0, int(config.get("bill_table_name_width") or 200))
 
 
 def add_to_bill(product_name, tablewidget, weight_input):
@@ -40,7 +112,7 @@ def add_to_bill(product_name, tablewidget, weight_input):
         name_text = str(product_details_by_name["name"])
         price_text = str(product_details_by_name["price"])
         unit = product_details_by_name["unit"]
-        qty_text = str(weight_input if unit == 'KG' or '0' else "1")
+        qty_text = str(weight_input if unit == ('KG' or '0') else "1")
         amount = float(product_details_by_name["price"]) * float(qty_text)
         amount = round(amount, 2)
         amount_text = str(amount)
@@ -86,74 +158,34 @@ def add_to_bill(product_name, tablewidget, weight_input):
         tablewidget.setItem(row_count, 3, amount)
 
 
+def clear_bill(tablewidget=None):
+    if not tablewidget:
+        return
+    tablewidget.clear()
+    tablewidget.setRowCount(0)
+    setTable(tablewidget)
+
+
 class UI(QWidget, Ui_Form):
 
     def __init__(self):
         super(UI, self).__init__()
-        self.config = Config()
-        self.ai_images_dpath = self.config.get('ai_images_dpath')
-        self.ai_products_dpath = self.config.get('ai_products_dpath')
+        self.product_name_list = None
+        self.ai_images_dpath = None
+        self.products_dpath = None
+
         self.ui_product_options = None
         self.setup_labels_window = None
 
         self.setupUi(self)
-        self._weight = None
-        # Start the recognition thread
+        self.showMaximized()
 
-        setTable(self.tableC1)
-        setTable(self.tableC2)
-        setTable(self.tableC3)
+        # region EVENT CONNECTIONS
 
         self.PB_setup_labels.clicked.connect(self.show_setup_labels)
         self.PB_delete_row.clicked.connect(self.delete_row)
-
         self.PB_print.clicked.connect(self.print_bill)
-
-        for i, btn in enumerate([self.btn1, self.btn2, self.btn3, self.btn4]):
-            btn.clicked.connect(self.show_product_options)
-
-        try:
-            self.product_name_list = get_product_name_list()
-
-            products_with_image = []
-
-            for product in self.product_name_list:
-                prod_image_gif_file_path = f"{self.ai_products_dpath}/{product}.gif"
-
-                if os.path.exists(prod_image_gif_file_path):
-                    products_with_image.append(product)
-
-            # Sort the product_name_list based on the availability of images
-            self.product_name_list = sorted(self.product_name_list, key=lambda x: x not in products_with_image)
-
-            # products_with_image will contain the products with images sorted first
-
-            for index, product in enumerate(self.product_name_list):
-                container = QWidget(self)
-                layout = QVBoxLayout(container)
-                btn: QPushButton = QPushButton(self)
-                btn.setFixedSize(100, 100)
-                container.setFixedSize(140, 140)
-                btn.product = product
-                btn.clicked.connect(self.product_clicked)
-
-                style=f"border-image: url('{self.ai_products_dpath}/{product}.gif');"
-                btn.setStyleSheet(style)
-                print(style)
-
-                label = QLabel(container)
-                product_details_by_name = get_product_details_by_name(product)
-                price = product_details_by_name['price']
-                label.setText(f"{product} - {price}")
-                label.setAlignment(Qt.AlignCenter)
-                layout.addWidget(btn)
-                layout.addWidget(label)
-                self.SAWC_products.layout().addWidget(container)
-        except Exception as e:
-            print(e)
-
         self.PB_weight_input.clicked.connect(lambda: self.weight_input_clicked(qty=""))
-
         self.PB_1.clicked.connect(lambda: self.lineEdit.setText(self.lineEdit.text() + "1"))
         self.PB_2.clicked.connect(lambda: self.lineEdit.setText(self.lineEdit.text() + "2"))
         self.PB_3.clicked.connect(lambda: self.lineEdit.setText(self.lineEdit.text() + "3"))
@@ -167,19 +199,23 @@ class UI(QWidget, Ui_Form):
         self.PB_dot.clicked.connect(lambda: self.lineEdit.setText(self.lineEdit.text() + "."))
         self.PB_clear.clicked.connect(lambda: self.lineEdit.setText(self.lineEdit.text()[:-1]))
         self.PB_empty.clicked.connect(lambda: self.lineEdit.setText(""))
-
         self.PB_plu.clicked.connect(self.search_by_plu)
-        self.PB_qty.clicked.connect(lambda: self.weight_input_clicked(self.lineEdit.text()) or self.lineEdit.setText(""))
+        self.PB_qty.clicked.connect(
+            lambda: self.weight_input_clicked(self.lineEdit.text()) or self.lineEdit.setText(""))
         self.tabWidget.currentChanged.connect(self.update_total)
 
+        for i, btn in enumerate([self.btn1, self.btn2, self.btn3, self.btn4]):
+            btn.clicked.connect(self.show_product_options)
+        # endregion
 
-    def clear_bill(self):
-        tablewidget = self.get_current_table()
-        if not tablewidget :
-            return
-        tablewidget.clear()
-        tablewidget.setRowCount(0)
-        setTable(tablewidget)
+        self.initialize_window()
+
+    def initialize_window(self):
+        setTable(self.tableC1)
+        setTable(self.tableC2)
+        setTable(self.tableC3)
+        self.ai_images_dpath = initialize_window_layout(self)
+
     def print_bill(self):
         self.PB_print.setEnabled(False)
         try:
@@ -190,42 +226,32 @@ class UI(QWidget, Ui_Form):
                 # print_bill(tablewidget)
 
             self.thread = PrintBillThread(tablewidget)
-            self.thread.finished.connect(lambda: self.PB_print.setEnabled(True) or self.clear_bill())  # Enable PB_print after self.thread finishes
+            self.thread.finished.connect(lambda: self.PB_print.setEnabled(
+                True) or clear_bill(tablewidget=self.get_current_table()))  # Enable PB_print after self.thread finishes
             self.thread.start()
         except Exception as e:
             print(e)
 
     def update_total(self):
-        tablewidget = self.get_current_table()
-        if not tablewidget :
-            return
-        total_amount=0
-        rows = tablewidget.rowCount()
-        for row in range(rows):
-            item = tablewidget.item(row, 3)
-            total_amount+=float(item.text())
-        self.label_total.setText(f"{total_amount:.2f}")
-
-    @property
-    def weight(self):
-        return self._weight
-
-    @weight.setter
-    def weight(self, value: pyqtSignal):
-        self._weight = value
-        self.weight.connect(self.set_weight)
-
-    def set_weight(self, weight):
-        self.PB_weight_input.setText(weight)
+        self.label_total.setText(f"{calculate_total(self.get_current_table()) :.2f}")
 
     def weight_input_clicked(self, qty=""):
         tablewidget = self.get_current_table()
-        if not tablewidget :
+        if not tablewidget:
             return
 
+        selected_row, qty_item, price_item, amount_item = self.get_selected_row_items(tablewidget)
+
+        pb_weight_input = self.PB_weight_input.text() if qty == "" else str(qty)
+
+        update_weight_input(tablewidget, qty_item, price_item, amount_item, pb_weight_input)
+
+        self.update_total()
+
+    def get_selected_row_items(self, tablewidget):
         row_count = tablewidget.rowCount()
         if row_count <= 0:
-            return
+            return None, None, None, None
 
         selected_items = tablewidget.selectedItems()
         if selected_items:
@@ -233,21 +259,11 @@ class UI(QWidget, Ui_Form):
         else:
             selected_row = row_count - 1
 
-
-
         qty_item = tablewidget.item(selected_row, 2)
         price_item = tablewidget.item(selected_row, 1)
         amount_item = tablewidget.item(selected_row, 3)
 
-        # qty_item.setText(self.PB_weight_input.text() if qty == "" else qty)
-        qty_item.setText(self.PB_weight_input.text() if qty == "" else str(qty))
-
-        amount = float(price_item.text()) * float(qty_item.text())
-        amount = round(amount, 2)
-        amount_text = str(amount)
-        if amount_item is not None:
-            amount_item.setText(amount_text)
-        self.update_total()
+        return selected_row, qty_item, price_item, amount_item
 
     def product_clicked(self):
         btn: QPushButton = self.sender()
@@ -274,7 +290,7 @@ class UI(QWidget, Ui_Form):
                 self.ui_product_options.close()
             self.ui_product_options = UI_product_options(ai_label=label,
                                                          add_product_to_current_table=self.add_product_to_current_table)
-            self.ui_product_options.show()
+
         except Exception as e:
             print(e)
 
@@ -294,7 +310,6 @@ class UI(QWidget, Ui_Form):
 
     def get_current_table(self):
         curr_index = self.tabWidget.currentIndex()
-        tablewidget = None
         if curr_index == 0:
             tablewidget = self.tableC1
         elif curr_index == 1:
@@ -308,27 +323,35 @@ class UI(QWidget, Ui_Form):
     def show_setup_labels(self):
         try:
             self.setup_labels_window = UI_setup_labels()
-            # self.setup_labels_window.setStyleSheet("""QScrollBar {\nwidth: 70px;\n}""")
             self.setup_labels_window.showMaximized()
+            self.setup_labels_window.closeEvent = lambda event: self.initialize_window()
         except Exception as e:
             print(e)
+
+    @pyqtSlot(str)
+    def set_weight(self, weight):
+        self.PB_weight_input.setText(weight)
 
     @pyqtSlot(list)
     def update_labels(self, labels):
         try:
-            self.labels = labels
-            self.update_ui()
+            self.update_ui(labels)
         except Exception as e:
             print(e)
 
-    def update_ui(self):
+    def update_ui(self, labels=["", "", "", ""]):
         try:
             self.btn0.setStyleSheet("border-image: url('captured_image.jpg');")
-            for i, btn in enumerate([self.btn1, self.btn2, self.btn3, self.btn4]):
-                btn.setText(self.labels[i])
-                btn.setStyleSheet(f"border-image: url('{self.ai_images_dpath}/{self.labels[i]}.gif');")
+            prediction_buttons = self.get_prediction_buttons()
+            for i, btn in enumerate(prediction_buttons):
+                btn.setText(labels[i])
+                btn.setStyleSheet(f"border-image: url('{self.ai_images_dpath}/{labels[i]}.gif');")
         except Exception as e:
             print(e)
+
+    def get_prediction_buttons(self):
+        prediction_buttons = [self.btn1, self.btn2, self.btn3, self.btn4]
+        return prediction_buttons
 
     def delete_row(self):
         tablewidget = self.get_current_table()
@@ -346,10 +369,6 @@ class UI(QWidget, Ui_Form):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     main_window = UI()
-    # main_window.setStyleSheet("""QScrollBar {\nwidth: 70px;\n}""")
-
-    main_window.showMaximized()
-
     try:
         recognition_thread = RecognitionThread()
         recognition_thread.start()
@@ -360,10 +379,9 @@ if __name__ == "__main__":
     try:
         weight_thread = WeightThread()
         weight_thread.start()
+        weight_thread.weight.connect(main_window.set_weight)
         weight_thread.stopped.connect(weight_thread.quit)
-        main_window.weight = weight_thread.weight
     except Exception as e:
         print(e)
-
 
     sys.exit(app.exec_())

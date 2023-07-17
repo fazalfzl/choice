@@ -95,13 +95,13 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>180</height>
+          <height>200</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>180</height>
+          <height>200</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -125,7 +125,7 @@ height: 50px;
            <x>0</x>
            <y>0</y>
            <width>562</width>
-           <height>128</height>
+           <height>148</height>
           </rect>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout">
