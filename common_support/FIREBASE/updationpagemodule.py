@@ -5,6 +5,7 @@ import subprocess
 def update_from_github(repo_url="https://github.com/fazalfzl/choice.git"):
     # Clone the repository in a temporary directory
     subprocess.call("update.bat", shell=True)
+    print("updated")
     # temp_dir = "temp_clone"
     # subprocess.run(["git", "clone", repo_url, temp_dir], shell=True)
     #
