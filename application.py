@@ -2,7 +2,7 @@ import os
 import sys
 
 from PyQt5.QtCore import pyqtSlot
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QScroller
 
 from common_support.WeightInput import WeightThread
 from common_support.print_bill import PrintBillThread
@@ -62,14 +62,11 @@ class UI(QWidget, Ui_Form):
         for i, btn in enumerate([self.btn1, self.btn2, self.btn3, self.btn4]):
             btn.clicked.connect(self.show_product_options)
 
-
-        self.PB_left_arrow.clicked.connect(lambda: self.open_products)
+        # self.PB_up_arrow.clicked.connect(self.open_new_window)
         # endregion
 
         self.initialize_window()
 
-    def open_products(self):
-        pass
 
     def initialize_window(self):
         setTable(self.tableC1)
@@ -244,5 +241,11 @@ if __name__ == "__main__":
         weight_thread.stopped.connect(weight_thread.quit)
     except Exception as e:
         print(e)
+
+    scroll = main_window.scrollArea
+
+    # Enable touch scrolling using QScroller
+    scroller = QScroller.scroller(scroll.viewport())
+    scroller.grabGesture(scroll.viewport(), QScroller.LeftMouseButtonGesture)
 
     sys.exit(app.exec_())

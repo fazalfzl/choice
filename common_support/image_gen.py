@@ -23,7 +23,6 @@ def generate_bill(table_data=None):
     bill_header_size = int(config.get("bill_header_size") or 18)
     bill_total_size = int(config.get("bill_total_size") or 25)
     table_cell_height = int(config.get("table_cell_height") or 50)
-    height = 600
     dpi = 2400
     qr_size = 200
     cell_widths = [int(bill_width / 2.5), int(bill_width / 5.2), int(bill_width / 5.2), int(bill_width / 4)]
@@ -58,8 +57,20 @@ def generate_bill(table_data=None):
 
         product_details = get_product_details_by_name(row[0])
         code = product_details['code'].zfill(code_length)
-        qty = str(row[2].replace('.', "")).zfill(qty_length)  # Ensure qty is 5 characters long with leading zeros
-        qr_text += f"{first_char}{code}{qty}\n"
+        # qty = str(row[2].replace('.', "")).zfill(qty_length)
+
+        unit = product_details["unit"]
+        # qty_text = str(weight_input if unit == ('KG' or '0') else "1")
+
+        qty_float  = float(row[2])
+
+        if unit == 'KG':
+            qty = str(int(qty_float*1000)).zfill(qty_length)
+        else:
+            qty = str(int(qty_float)).zfill(qty_length)
+
+
+        qr_text += f"{first_char}{code}{qty},"
 
     print(qr_text)
 

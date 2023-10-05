@@ -22,7 +22,11 @@ class UI_product_options(QWidget, Ui_Form):
 
 
 
-        for product in products:
+        for i, product in enumerate(products):
+            row = i // 4
+            col = i % 4
+
+        # for product in products:
             container = QWidget(self)
             layout = QVBoxLayout(container)
             btn:QPushButton=QPushButton(self)
@@ -45,7 +49,7 @@ class UI_product_options(QWidget, Ui_Form):
             qlabel.setAlignment(Qt.AlignCenter)
             layout.addWidget(btn)
             layout.addWidget(qlabel)
-            self.SAWC.layout().addWidget(container)
+            self.SAWC.layout().addWidget(container, row, col)
 
         self.show()
 

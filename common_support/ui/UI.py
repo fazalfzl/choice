@@ -14,15 +14,61 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(1167, 654)
+        Form.resize(1225, 806)
         self.gridLayout_3 = QtWidgets.QGridLayout(Form)
         self.gridLayout_3.setContentsMargins(-1, 0, -1, 0)
         self.gridLayout_3.setObjectName("gridLayout_3")
         self.widget = QtWidgets.QWidget(Form)
         self.widget.setObjectName("widget")
-        self.gridLayout_2 = QtWidgets.QGridLayout(self.widget)
+        self.gridLayout_17 = QtWidgets.QGridLayout(self.widget)
+        self.gridLayout_17.setObjectName("gridLayout_17")
+        self.tabWidget_2 = QtWidgets.QTabWidget(self.widget)
+        self.tabWidget_2.setStyleSheet("QTabWidget::pane {\n"
+"    background: #fff; \n"
+"}\n"
+"\n"
+"QTabBar::tab {\n"
+" height: 30px;  /* Adjust the height of the tabs */\n"
+"    width: 120px;  /* Adjust the width of the tabs */\n"
+"    font-size: 16px;  /* Adjust the font size of the tabs */\n"
+"    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                stop: 0 #ff5722, stop: 1 #ff7043);\n"
+"    color: #fff;\n"
+"    padding: 10px 30px;\n"
+"    border-top-left-radius: 10px;\n"
+"    border-top-right-radius: 10px;\n"
+"    border-bottom-left-radius: 0px;\n"
+"    border-bottom-right-radius: 0px;\n"
+"    border: 1px solid #ff5722;  \n"
+"}\n"
+" \n"
+"QTabBar::tab:hover {\n"
+"    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                stop: 0 #ff7043, stop: 1 #ff8a65);\n"
+"}\n"
+" \n"
+"QTabBar::tab:selected {\n"
+"    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                stop: 0 #2196F3, stop: 1 #1976D2);\n"
+"    color: #fff;\n"
+"    border-top-left-radius: 10px;\n"
+"    border-top-right-radius: 10px;\n"
+"    border-bottom-left-radius: 0px;\n"
+"    border-bottom-right-radius: 0px;\n"
+"    border: 1px solid #2196F3;\n"
+"}\n"
+" \n"
+"QTabBar::tab:selected:hover {\n"
+"    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                stop: 0 #1976D2, stop: 1 #0D47A1);\n"
+"}\n"
+"")
+        self.tabWidget_2.setObjectName("tabWidget_2")
+        self.tab = QtWidgets.QWidget()
+        self.tab.setObjectName("tab")
+        self.gridLayout_2 = QtWidgets.QGridLayout(self.tab)
         self.gridLayout_2.setObjectName("gridLayout_2")
-        self.widget_2 = QtWidgets.QWidget(self.widget)
+        self.widget_2 = QtWidgets.QWidget(self.tab)
         self.widget_2.setStyleSheet("QPushButton {    width: 80px; height: 80px;}")
         self.widget_2.setObjectName("widget_2")
         self.gridLayout = QtWidgets.QGridLayout(self.widget_2)
@@ -55,7 +101,7 @@ class Ui_Form(object):
         self.btn2.setObjectName("btn2")
         self.gridLayout.addWidget(self.btn2, 0, 0, 1, 1)
         self.gridLayout_2.addWidget(self.widget_2, 1, 0, 1, 1)
-        self.btn1 = QtWidgets.QPushButton(self.widget)
+        self.btn1 = QtWidgets.QPushButton(self.tab)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -63,32 +109,26 @@ class Ui_Form(object):
         self.btn1.setSizePolicy(sizePolicy)
         self.btn1.setObjectName("btn1")
         self.gridLayout_2.addWidget(self.btn1, 0, 0, 1, 1)
-        self.widget_10 = QtWidgets.QWidget(self.widget)
+        self.tabWidget_2.addTab(self.tab, "")
+        self.tab_2 = QtWidgets.QWidget()
+        self.tab_2.setObjectName("tab_2")
+        self.gridLayout_18 = QtWidgets.QGridLayout(self.tab_2)
+        self.gridLayout_18.setObjectName("gridLayout_18")
+        self.widget_10 = QtWidgets.QWidget(self.tab_2)
         self.widget_10.setObjectName("widget_10")
         self.gridLayout_14 = QtWidgets.QGridLayout(self.widget_10)
         self.gridLayout_14.setObjectName("gridLayout_14")
         self.scrollArea = QtWidgets.QScrollArea(self.widget_10)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Maximum)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.scrollArea.sizePolicy().hasHeightForWidth())
-        self.scrollArea.setSizePolicy(sizePolicy)
-        self.scrollArea.setMinimumSize(QtCore.QSize(0, 200))
-        self.scrollArea.setMaximumSize(QtCore.QSize(16777215, 200))
-        self.scrollArea.setStyleSheet("QScrollBar {\n"
-"width: 80px;\n"
-"height: 50px;\n"
-"}")
-        self.scrollArea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.scrollArea.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
+        self.scrollArea.setStyleSheet("")
+        self.scrollArea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        self.scrollArea.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.SAWC_products = QtWidgets.QWidget()
-        self.SAWC_products.setGeometry(QtCore.QRect(0, 0, 478, 148))
+        self.SAWC_products.setGeometry(QtCore.QRect(0, 0, 521, 698))
         self.SAWC_products.setObjectName("SAWC_products")
-        self.horizontalLayout = QtWidgets.QHBoxLayout(self.SAWC_products)
-        self.horizontalLayout.setContentsMargins(-1, 0, -1, 0)
-        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.gridLayout_20 = QtWidgets.QGridLayout(self.SAWC_products)
+        self.gridLayout_20.setObjectName("gridLayout_20")
         self.scrollArea.setWidget(self.SAWC_products)
         self.gridLayout_14.addWidget(self.scrollArea, 0, 0, 1, 1)
         self.widget_11 = QtWidgets.QWidget(self.widget_10)
@@ -99,33 +139,10 @@ class Ui_Form(object):
         self.widget_11.setObjectName("widget_11")
         self.gridLayout_16 = QtWidgets.QGridLayout(self.widget_11)
         self.gridLayout_16.setObjectName("gridLayout_16")
-        self.PB_up_arrow = QtWidgets.QPushButton(self.widget_11)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.PB_up_arrow.sizePolicy().hasHeightForWidth())
-        self.PB_up_arrow.setSizePolicy(sizePolicy)
-        self.PB_up_arrow.setObjectName("PB_up_arrow")
-        self.gridLayout_16.addWidget(self.PB_up_arrow, 0, 0, 1, 1)
-        self.PB_left_arrow = QtWidgets.QPushButton(self.widget_11)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.PB_left_arrow.sizePolicy().hasHeightForWidth())
-        self.PB_left_arrow.setSizePolicy(sizePolicy)
-        self.PB_left_arrow.setObjectName("PB_left_arrow")
-        self.gridLayout_16.addWidget(self.PB_left_arrow, 1, 0, 1, 1)
-        self.PB_right_arrow = QtWidgets.QPushButton(self.widget_11)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.PB_right_arrow.sizePolicy().hasHeightForWidth())
-        self.PB_right_arrow.setSizePolicy(sizePolicy)
-        self.PB_right_arrow.setObjectName("PB_right_arrow")
-        self.gridLayout_16.addWidget(self.PB_right_arrow, 2, 0, 1, 1)
         self.gridLayout_14.addWidget(self.widget_11, 0, 1, 1, 1)
-        self.gridLayout_2.addWidget(self.widget_10, 2, 0, 1, 1)
-        self.gridLayout_2.setRowStretch(0, 3)
+        self.gridLayout_18.addWidget(self.widget_10, 0, 0, 1, 1)
+        self.tabWidget_2.addTab(self.tab_2, "")
+        self.gridLayout_17.addWidget(self.tabWidget_2, 0, 0, 1, 1)
         self.gridLayout_3.addWidget(self.widget, 0, 0, 1, 1)
         self.widget_3 = QtWidgets.QWidget(Form)
         self.widget_3.setObjectName("widget_3")
@@ -133,11 +150,48 @@ class Ui_Form(object):
         self.gridLayout_6.setContentsMargins(-1, 0, -1, 0)
         self.gridLayout_6.setObjectName("gridLayout_6")
         self.tabWidget = QtWidgets.QTabWidget(self.widget_3)
-        self.tabWidget.setStyleSheet("QTabBar::tab {\n"
-"    height: 30px;  /* Adjust the height of the tabs */\n"
+        self.tabWidget.setStyleSheet(" \n"
+"\n"
+"QTabWidget::pane {\n"
+"    background: #fff; \n"
+"}\n"
+"\n"
+"QTabBar::tab {\n"
+" height: 30px;  /* Adjust the height of the tabs */\n"
 "    width: 120px;  /* Adjust the width of the tabs */\n"
 "    font-size: 16px;  /* Adjust the font size of the tabs */\n"
-"}")
+"    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                stop: 0 #ff5722, stop: 1 #ff7043);\n"
+"    color: #fff;\n"
+"    padding: 10px 30px;\n"
+"    border-top-left-radius: 10px;\n"
+"    border-top-right-radius: 10px;\n"
+"    border-bottom-left-radius: 0px;\n"
+"    border-bottom-right-radius: 0px;\n"
+"    border: 1px solid #ff5722;  \n"
+"}\n"
+" \n"
+"QTabBar::tab:hover {\n"
+"    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                stop: 0 #ff7043, stop: 1 #ff8a65);\n"
+"}\n"
+" \n"
+"QTabBar::tab:selected {\n"
+"    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                stop: 0 #2196F3, stop: 1 #1976D2);\n"
+"    color: #fff;\n"
+"    border-top-left-radius: 10px;\n"
+"    border-top-right-radius: 10px;\n"
+"    border-bottom-left-radius: 0px;\n"
+"    border-bottom-right-radius: 0px;\n"
+"    border: 1px solid #2196F3;\n"
+"}\n"
+" \n"
+"QTabBar::tab:selected:hover {\n"
+"    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                stop: 0 #1976D2, stop: 1 #0D47A1);\n"
+"}\n"
+"")
         self.tabWidget.setObjectName("tabWidget")
         self.tabC1 = QtWidgets.QWidget()
         self.tabC1.setObjectName("tabC1")
@@ -338,6 +392,7 @@ class Ui_Form(object):
         self.gridLayout_3.addWidget(self.widget_3, 0, 2, 1, 1)
 
         self.retranslateUi(Form)
+        self.tabWidget_2.setCurrentIndex(0)
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
@@ -345,9 +400,8 @@ class Ui_Form(object):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
         self.btn1.setText(_translate("Form", "***"))
-        self.PB_up_arrow.setText(_translate("Form", "↑"))
-        self.PB_left_arrow.setText(_translate("Form", "←"))
-        self.PB_right_arrow.setText(_translate("Form", "→"))
+        self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab), _translate("Form", "AI"))
+        self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_2), _translate("Form", "PRODUCTS"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabC1), _translate("Form", "C1"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabC2), _translate("Form", "C2"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabC3), _translate("Form", "C3"))

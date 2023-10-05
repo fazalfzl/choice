@@ -18,9 +18,12 @@ def initialize_window_layout(main_window_object):
         product_name_list = sorted(product_name_list, key=lambda x: x not in products_with_file)
 
         layout = main_window_object.SAWC_products.layout()
-        for index, product in enumerate(product_name_list):
+        for i, product in enumerate(product_name_list):
+            row = i // 4
+            col = i % 4
+        # for index, product in enumerate(product_name_list):
             container = QWidget(main_window_object)
-            layout.addWidget(container)
+            layout.addWidget(container,row,col)
 
             btn = QPushButton(main_window_object)
             btn.setFixedSize(100, 100)
